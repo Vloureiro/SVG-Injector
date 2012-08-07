@@ -49,7 +49,7 @@ html
 			#best-practices
 				h2 Best Practices
 
-		svg#prefix-svg-container(width="0", height="0")
+		svg#svg-injection-container(width="0", height="0")
 			svg#icon-ampersand.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/ampersand.svg
 			svg#icon-aperture.iconic(xmlns="http://www.w3.org/2000/svg")
@@ -86,4 +86,14 @@ html
 				include svg/wrench.svg
 			svg#icon-x-alt.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/x_alt.svg
-		script(src="app.js")
+		script(src="svg-css-injector.js")
+		script
+				date1 = new Date()
+				milliseconds1 = date1.getTime()
+				icn = new Iconizer('#svg-injection-container .iconic', {'icon-ampersand':'#00ff00', 'icon-x':'#0000ff'})
+				date2 = new Date()
+				milliseconds2 = date2.getTime()
+				diff=date2-date1
+				console.log(diff)
+			
+			

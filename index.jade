@@ -1,0 +1,89 @@
+html
+	head
+		link(rel="stylesheet", href="style.css")
+	body
+		.container
+			h1 SVG CSS Injection Demo
+			#introduction
+				h2 Introduction
+				ul
+					li What it is
+				a(href="#") Link to full article
+
+				h2 Advantages
+
+			#demo
+				h2 Demo
+				ul
+					li
+						h3 Basic SVG CSS Injection
+						span.icon.icon-bolt Bolt
+
+
+
+					li
+						h3 Modifying SVG Prior to Injection
+						span.icon.icon-dial The SVG references <em>was</em> black, but was modified at runtime to be red.
+
+					li
+						h3 Rewriting CSS Rules
+						span.icon.icon-dial
+						a.button Change the colors
+ 
+			#code
+				h2 Sample Code
+				p Lorem ipsum
+				h3 HTML
+				code 
+					pre
+				h3 CSS
+				code
+					pre
+				h3 Javascript
+				code
+					pre
+
+			#performance
+				h2 Performance
+
+			#best-practices
+				h2 Best Practices
+
+		svg#prefix-svg-container(width="0", height="0")
+			svg#icon-ampersand.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/ampersand.svg
+			svg#icon-aperture.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/aperture.svg
+			svg#icon-bolt.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/bolt.svg
+			svg#icon-brush.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/brush.svg
+			svg#icon-cloud.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/cloud.svg
+			svg#icon-cog.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/cog.svg
+			svg#icon-curved-arrow.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/curved_arrow.svg
+			svg#icon-denied.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/denied.svg
+			svg#icon-dial.iconic(xmlns="http://www.w3.org/2000/svg")	
+				include svg/dial.svg
+			svg#icon-eye.iconic(xmlns="http://www.w3.org/2000/svg")	
+				include svg/eye.svg
+			svg#icon-fork.iconic(xmlns="http://www.w3.org/2000/svg")	
+				include svg/fork.svg
+			svg#icon-layers.iconic(xmlns="http://www.w3.org/2000/svg")	
+				include svg/layers.svg
+			svg#icon-mail.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/mail.svg
+			svg#icon-mic.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/mic.svg
+			svg#icon-paperclip.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/paperclip.svg
+			svg#icon-spin.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/spin.svg
+			svg#icon-wrench.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/wrench.svg
+			svg#icon-x-alt.iconic(xmlns="http://www.w3.org/2000/svg")
+				include svg/x_alt.svg
+		script(src="app.js")

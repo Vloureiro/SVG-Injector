@@ -1,9 +1,50 @@
-.icon {
-	display:block;
-	background-size: contain;
-	height:20px;
-	background-repeat: no-repeat;
-	padding-left:24px;
-	margin:10px;
-}
+body {
+  font-family: 'Helvetica', Helvetica, Arial, sans-serif; }
 
+.container {
+  width: 940px;
+  padding: 0 20px;
+  margin: 0 auto; }
+
+#basic-injection .icon, #modified-injection .icon, #rewriting-injection .icon {
+  float: left;
+  width: 132px;
+  padding: 140px 20px 10px 20px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: auto 70px;
+  background-position: center center;
+  background-color: #fafafa;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  font-size: 12px; }
+#basic-injection .icon:first-child, #basic-injection .icon:nth-child(5n+1), #modified-injection .icon:first-child, #modified-injection .icon:nth-child(5n+1), #rewriting-injection .icon:first-child, #rewriting-injection .icon:nth-child(5n+1) {
+  margin-left: 0; }
+#basic-injection .icon:nth-child(5n), #modified-injection .icon:nth-child(5n), #rewriting-injection .icon:nth-child(5n) {
+  margin-right: 0; }
+
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+.cf:after {
+  clear: both; }
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+  *zoom: 1; }

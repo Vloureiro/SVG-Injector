@@ -1,5 +1,6 @@
 html
 	head
+		title SVG CSS Injection Demo
 		link(rel="stylesheet", href="style.css")
 	body
 		.container
@@ -14,21 +15,64 @@ html
 
 			#demo
 				h2 Demo
-				ul
-					li
-						h3 Basic SVG CSS Injection
-						span.icon.icon-bolt Bolt
+				h3 Basic SVG CSS Injection
+				#basic-injection.cf
+					.icon.icon-ampersand 
+						span.label Ampersand
+					.icon.icon-aperture 
+						span.label Aperture
+					.icon.icon-bolt 
+						span.label Bolt
+					.icon.icon-brush 
+						span.label Brush
+					.icon.icon-cloud 
+						span.label Cloud
+					.icon.icon-cog 
+						span.label Cog
+					.icon.icon-curved-arrow 
+						span.label Curved Arrow
+					.icon.icon-denied 
+						span.label Denied
+					.icon.icon-dial 
+						span.label Dial
+					.icon.icon-eye 
+						span.label Eye
+					.icon.icon-fork 
+						span.label Fork
+					.icon.icon-layers 
+						span.label Layers
+					.icon.icon-mail 
+						span.label Mail
+					.icon.icon-mic 
+						span.label Mic
+					.icon.icon-paperclip 
+						span.label Paperclip
+					.icon.icon-spin 
+						span.label Spin
+					.icon.icon-wrench 
+						span.label Wrench
+					.icon.icon-x-alt 
+						span.label X
 
+				h3 Modifying SVG Prior to Injection
+				span The SVG references <em>was</em> black, but was modified at runtime to be the following colors.
+				#modified-injection.cf
+					.icon.icon-bolt-35d3e9 
+						span.label #35d3e9 
+					.icon.icon-bolt-ff9200
+						span.label #ff9200 
+					.icon.icon-bolt-b66dff
+						span.label #b66dff 
+					.icon.icon-bolt-ff006a
+						span.label #ff006a 
+					.icon.icon-bolt-8cdb00
+						span.label #8cdb00 
 
-
-					li
-						h3 Modifying SVG Prior to Injection
-						span.icon.icon-dial The SVG references <em>was</em> black, but was modified at runtime to be red.
-
-					li
-						h3 Rewriting CSS Rules
-						span.icon.icon-dial
-						a.button Change the colors
+				h3 Rewriting CSS Rules
+				#rewriting-injection.cf
+					.icon.icon-paperclip 
+						span.label Paperclip
+					a.button(onclick="icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))") Change the colors
  
 			#code
 				h2 Sample Code
@@ -66,13 +110,13 @@ html
 				include svg/curved_arrow.svg
 			svg#icon-denied.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/denied.svg
-			svg#icon-dial.iconic(xmlns="http://www.w3.org/2000/svg")	
+			svg#icon-dial.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/dial.svg
-			svg#icon-eye.iconic(xmlns="http://www.w3.org/2000/svg")	
+			svg#icon-eye.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/eye.svg
-			svg#icon-fork.iconic(xmlns="http://www.w3.org/2000/svg")	
+			svg#icon-fork.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/fork.svg
-			svg#icon-layers.iconic(xmlns="http://www.w3.org/2000/svg")	
+			svg#icon-layers.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/layers.svg
 			svg#icon-mail.iconic(xmlns="http://www.w3.org/2000/svg")
 				include svg/mail.svg
@@ -90,7 +134,7 @@ html
 		script
 				date1 = new Date()
 				milliseconds1 = date1.getTime()
-				icn = new Iconizer('#svg-injection-container .iconic', {'icon-ampersand':'#00ff00', 'icon-x':'#0000ff'})
+				icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00'], 'icon-ampersand':['#00ff00']})
 				date2 = new Date()
 				milliseconds2 = date2.getTime()
 				diff=date2-date1

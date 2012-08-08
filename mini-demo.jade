@@ -1,0 +1,37 @@
+html
+	head
+		title SVG CSS injection. A simple demo.
+		style
+			body {
+				padding:30px;
+				font-family:'Helvetica', Helvetica, Arial, sans-serif;
+			}
+
+			<!-- You still need to manage all rules around positioning, sizing, repeating, etc. for the background image -->
+			.icon {
+				width:132px;
+				padding:140px 20px 10px 20px;
+				text-align:center;
+				background-repeat: no-repeat;
+				background-size:auto 70px;
+				background-position:center center;
+				background-color:#fafafa;
+				box-shadow:0 0 20px rgba(0,0,0,.2);
+				margin:10px;
+				font-size:12px;
+			}
+
+	body
+		h1 SVG CSS injection. A simple demo.
+
+		<!-- All rules are created as classes based on the id of the referenced SVG node. In this case, 'icon-mail' -->
+		div.icon.icon-mail
+			span.label Mail
+
+		<!-- All SVGs are placed in the footer to stay out of the way -->
+		svg#svg-injection-container(width="0", height="0")
+			svg#icon-mail.iconic(xmlns="http://www.w3.org/2000/svg)
+				include svg/mail.svg
+		script(src="svg-css-injector.js")
+		script
+			var icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-mail':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00']})

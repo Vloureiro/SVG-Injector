@@ -9,13 +9,21 @@ html
 				h2 Introduction
 				ul
 					li What it is
+					li It never felt quite right to treat an SVG like an image. The strength of SVG is that it's text-based. That can and should be used as a strength
 				a(href="#") Link to full article
 
+
 				h2 Advantages
+				ul
+					li Multiple Background
+					li Page-specific CSS rules
+					li Dynamic SVG variation creation
+					li Run-time SVG alteration
 
 			#demo
 				h2 Demo
 				h3 Basic SVG CSS Injection
+				p Look at the original HTML/CSS source - there's no reference to these background images.
 				#basic-injection.cf
 					.icon.icon-ampersand 
 						span.label Ampersand
@@ -55,7 +63,7 @@ html
 						span.label X
 
 				h3 Modifying SVG Prior to Injection
-				span The SVG references <em>was</em> black, but was modified at runtime to be the following colors.
+				span The original SVG in the footer is black, but additional rules were created at load time.
 				#modified-injection.cf
 					.icon.icon-bolt-35d3e9 
 						span.label #35d3e9 
@@ -74,21 +82,28 @@ html
 						span.label Paperclip
 					a.button(onclick="icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))") Change the colors
  
+				h3 Multiple SVGs in Background
+				span The original SVG in the footer is black, but additional rules were created at load time.
+				#multiple-svg-injection.cf
+					.icon.icon-mail.icon-spin.icon-wrench 
+						span.label Mail, Spin &amp; Wrench
+									
 			#code
 				h2 Sample Code
 				p Lorem ipsum
 				h3 HTML
-				code 
-					pre
-				h3 CSS
-				code
-					pre
+				pre 
+					code
+						include mini-demo-code-html.html
+				p It's important to note that this process simply creates a <code>background-image</code> rule for each SVG node. This means that sizing, positioning, repeating, etc. needs to be handled manually.
 				h3 Javascript
-				code
-					pre
+				pre
+					code
+						include mini-demo-code-javascript.html
 
 			#performance
 				h2 Performance
+				p My tests have been very positive. This demo averages around a 9ms execution time on my laptop in Chrome/Firefox. It took your browser <span id="execution-time"></span>ms.
 
 			#best-practices
 				h2 Best Practices
@@ -135,9 +150,10 @@ html
 				date1 = new Date()
 				milliseconds1 = date1.getTime()
 				icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00'], 'icon-ampersand':['#00ff00']})
+				icnzr.combine(['icon-mail', 'icon-spin', 'icon-wrench'], ['#b66dff', '#ff006a', '#8cdb00'])
 				date2 = new Date()
 				milliseconds2 = date2.getTime()
 				diff=date2-date1
-				console.log(diff)
-			
+				document.querySelector('#execution-time').innerHTML=diff;
+				//console.log(diff)
 			

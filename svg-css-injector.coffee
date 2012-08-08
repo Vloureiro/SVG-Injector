@@ -33,21 +33,7 @@ class Iconizer
 		else 
 			style.appendChild(document.createTextNode(css))
 		head.appendChild(style)
-		
-		
 
-		#console.log(styl.innerHTML)
-		#str = styl.innerHTML
-		#someObject = {}
-		#matches = str.match( /^\.(.*?){(.*?)}/ );
-		#console.log(matches)
-		#someObject[matches[1].replace(/ /g,'')] = matches[2].replace(/ /g,'');
-
-		
-
-		return
-
-	getSVGString: (id) ->
 		return
 
 	rewriteRule: (icon, color) ->
@@ -69,13 +55,33 @@ class Iconizer
 
 		styl.innerHTML=styl.innerHTML.replace(pattern, css);
 
-	refreshRule: (id) ->
+	combine: (ids, colors) ->
+		selector=''
+		cssSelector=''
+		for id, i in ids
+			selector+='#'+id
+			cssSelector+='.'+id
+			if i < ids.length-1
+				selector+=', '
+		svgs = document.querySelectorAll(selector)
+		rules=''
+		s = new XMLSerializer(); 
+		for svg, i in svgs
+			id = svg.getAttribute('id')
+			if colors[i]
+				color=colors[i]
+				items = svg.querySelectorAll('[fill]')
+				for item in items
+					item.setAttribute('fill', color)
+				rules+='url(\'data:image/svg+xml;utf8,'+escape(s.serializeToString(svg.firstChild))+'\')'
+			else 
+				rules+='url(\'data:image/svg+xml;utf8,'+escape(s.serializeToString(svg.firstChild))+'\')'
+			if i < svgs.length-1
+				rules+=', '
+		css = cssSelector+' { background-image: '+rules+' }'
+		style = document.querySelector('.svg-css-injection')
+		if style.styleSheet
+			style.styleSheet.cssText+=css
+		else 
+			style.appendChild(document.createTextNode(css))
 		return
-
-
-###
-var str = ".cssRule { value: 'foo'; }";
-var someObject = new Object;
-var matches = str.match( /^\.(.*?){(.*?)}/ );
-someObject[matches[1].replace(/ /g,'')] = matches[2].replace(/ /g,'');
-###

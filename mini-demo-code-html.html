@@ -1,0 +1,25 @@
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;SVG CSS injection. A simple demo.&lt;/title&gt;
+    &lt;style&gt;
+      body {
+       padding:30px;
+       font-family:'Helvetica', Helvetica, Arial, sans-serif;
+      }
+      &lt;!-- You still need to manage all rules around positioning, sizing, repeating, etc. for the background image --&gt;
+      .icon {
+       width:132px; padding:140px 20px 10px 20px; text-align:center; background-repeat: no-repeat; background-size:auto 70px; background-position:center center; background-color:#fafafa; box-shadow:0 0 20px rgba(0,0,0,.2); margin:10px; font-size:12px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;SVG CSS injection. A simple demo.&lt;/h1&gt;
+    &lt;div class=&quot;icon icon-mail&quot;&gt;&lt;span class=&quot;label&quot;&gt;Mail&lt;/span&gt;&lt;/div&gt;
+    &lt;svg id=&quot;svg-injection-container&quot; width=&quot;0&quot; height=&quot;0&quot;&gt;
+      &lt;svg id=&quot;icon-mail&quot; class=&quot;iconic&quot;&gt;&lt;svg style=&quot;enable-background:new 0 0 32 24&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; height=&quot;24px&quot; width=&quot;32px&quot; y=&quot;0px&quot; x=&quot;0px&quot;  viewBox=&quot;0 0 32 24&quot;&gt;&lt;g fill=&quot;#010101&quot;&gt;	&lt;polygon points=&quot;16 11 32 3.9 32 0 0 0 0 3.9&quot;/&gt;	&lt;polygon points=&quot;16 16 0 8.3 0 24 32 24 32 8.3&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;
+      &lt;/svg&gt;
+    &lt;/svg&gt;
+    &lt;script src=&quot;svg-css-injector.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-mail':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00']})&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;

@@ -1,5 +1,7 @@
 body {
 	font-family:'Helvetica', Helvetica, Arial, sans-serif;
+	line-height:1.4;
+	font-size:14px;
 }
 
 .container {
@@ -8,7 +10,7 @@ body {
 	margin:0 auto;
 }
 
-#basic-injection, #modified-injection, #rewriting-injection {
+#basic-injection, #multiple-svg-injection, #modified-injection, #rewriting-injection {
 	.icon {
 		float:left;
 		width:132px;
@@ -28,6 +30,20 @@ body {
 	.icon:nth-child(5n) {
 		margin-right:0;
 	}
+	.icon-mail.icon-spin.icon-wrench {
+		background-size:25%, 25%, 25%;
+		background-position: 15% 65%, 50% 15%, 85% 65%;
+	}
+}
+
+pre {
+ white-space: pre-wrap;
+ white-space: -moz-pre-wrap;
+ white-space: -o-pre-wrap;
+ background: #fafafa;
+ border-left:10px solid #efefef;
+ padding:20px;
+ margin:10px 0;
 }
 
 /**

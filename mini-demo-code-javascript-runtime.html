@@ -1,0 +1,4 @@
+var icnzr = new Iconizer('#svg-injection-container .iconic')
+var button = document.querySelector('#runtime-injection .button').onclick = function() {
+	icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))
+}

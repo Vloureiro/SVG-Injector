@@ -8,7 +8,15 @@ body {
   padding: 0 20px;
   margin: 0 auto; }
 
-#basic-injection .icon, #multiple-svg-injection .icon, #modified-injection .icon, #rewriting-injection .icon {
+.section {
+  border-top: 1px solid #efefef;
+  margin: 20px 0;
+  padding: 20px 0; }
+
+.sub-section {
+  margin: 30px 0; }
+
+#basic-injection .icon, #multiple-svg-injection .icon, #runtime-injection .icon, #modified-injection .icon {
   float: left;
   width: 132px;
   padding: 140px 20px 10px 20px;
@@ -19,14 +27,23 @@ body {
   background-color: #fafafa;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   margin: 10px;
-  font-size: 12px; }
-#basic-injection .icon:first-child, #basic-injection .icon:nth-child(5n+1), #multiple-svg-injection .icon:first-child, #multiple-svg-injection .icon:nth-child(5n+1), #modified-injection .icon:first-child, #modified-injection .icon:nth-child(5n+1), #rewriting-injection .icon:first-child, #rewriting-injection .icon:nth-child(5n+1) {
+  font-size: 12px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+#basic-injection .icon:first-child, #basic-injection .icon:nth-child(5n+1), #multiple-svg-injection .icon:first-child, #multiple-svg-injection .icon:nth-child(5n+1), #runtime-injection .icon:first-child, #runtime-injection .icon:nth-child(5n+1), #modified-injection .icon:first-child, #modified-injection .icon:nth-child(5n+1) {
   margin-left: 0; }
-#basic-injection .icon:nth-child(5n), #multiple-svg-injection .icon:nth-child(5n), #modified-injection .icon:nth-child(5n), #rewriting-injection .icon:nth-child(5n) {
+#basic-injection .icon:nth-child(5n), #multiple-svg-injection .icon:nth-child(5n), #runtime-injection .icon:nth-child(5n), #modified-injection .icon:nth-child(5n) {
   margin-right: 0; }
-#basic-injection .icon-mail.icon-spin.icon-wrench, #multiple-svg-injection .icon-mail.icon-spin.icon-wrench, #modified-injection .icon-mail.icon-spin.icon-wrench, #rewriting-injection .icon-mail.icon-spin.icon-wrench {
+#basic-injection .icon-mail.icon-spin.icon-wrench, #multiple-svg-injection .icon-mail.icon-spin.icon-wrench, #runtime-injection .icon-mail.icon-spin.icon-wrench, #modified-injection .icon-mail.icon-spin.icon-wrench {
   background-size: 25%, 25%, 25%;
   background-position: 20% 65%, 50% 20%, 80% 65%; }
+
+p.large {
+  font-size: 16px; }
 
 pre {
   white-space: pre-wrap;
@@ -36,6 +53,9 @@ pre {
   border-left: 10px solid #efefef;
   padding: 20px;
   margin: 10px 0; }
+
+dl dt {
+  font-weight: bold; }
 
 /**
  * For modern browsers

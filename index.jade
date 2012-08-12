@@ -5,108 +5,126 @@ html
 	body
 		.container
 			h1 SVG CSS Injection Demo
-			#introduction
+			#introduction.section
 				h2 Introduction
-				ul
-					li What it is
-					li It never felt quite right to treat an SVG like an image. The strength of SVG is that it's text-based. That can and should be used as a strength
-				a(href="#") Link to full article
-
-
+				p.large SVG CSS injection is a new approach towards displaying vector imagery in HTML. The method works by including SVG information in the footer and using Javascript to parse the SVGs to generate CSS rules. Since this is a preliminary demo, I've kept the sample code light - just view source to see all the details.
+				
 				h2 Advantages
-				ul
-					li Multiple Background
-					li Page-specific CSS rules
-					li Dynamic SVG variation creation
-					li Run-time SVG alteration
+				dl
+					dt Reduction of Page Requests
+						dd All SVG is pulled down with your HTML file (the one request you <em>can't</em> remove). 
+					dt Page-specific CSS Rules
+						dd Only include the SVG you need for a specific page. This can make CSS files considerable smaller if you're using data URIs in your CSS. There's no need to include 20 data URI SVGs in your CSS if you're only using 2.
+					dt Dynamic Creation of Variations
+						dd With SVG included in your HTML, it is DOM-accessibile. This allows the creation of multiple variations of an icon based on a single SVG. 
+					dt Create Advanced Background Rules
+						dd Use separate SVGs to build complex multiple background rules.
 
-			#demo
+			#demo.section
 				h2 Demo
-				h3 Basic SVG CSS Injection
-				p Look at the original HTML/CSS source - there's no reference to these background images.
-				#basic-injection.cf
-					.icon.icon-ampersand 
-						span.label Ampersand
-					.icon.icon-aperture 
-						span.label Aperture
-					.icon.icon-bolt 
-						span.label Bolt
-					.icon.icon-brush 
-						span.label Brush
-					.icon.icon-cloud 
-						span.label Cloud
-					.icon.icon-cog 
-						span.label Cog
-					.icon.icon-curved-arrow 
-						span.label Curved Arrow
-					.icon.icon-denied 
-						span.label Denied
-					.icon.icon-dial 
-						span.label Dial
-					.icon.icon-eye 
-						span.label Eye
-					.icon.icon-fork 
-						span.label Fork
-					.icon.icon-layers 
-						span.label Layers
-					.icon.icon-mail 
-						span.label Mail
-					.icon.icon-mic 
-						span.label Mic
-					.icon.icon-paperclip 
-						span.label Paperclip
-					.icon.icon-spin 
-						span.label Spin
-					.icon.icon-wrench 
-						span.label Wrench
-					.icon.icon-x-alt 
-						span.label X
-
-				h3 Modifying SVG Prior to Injection
-				span The original SVG in the footer is black, but additional rules were created at load time.
-				#modified-injection.cf
-					.icon.icon-bolt-35d3e9 
-						span.label #35d3e9 
-					.icon.icon-bolt-ff9200
-						span.label #ff9200 
-					.icon.icon-bolt-b66dff
-						span.label #b66dff 
-					.icon.icon-bolt-ff006a
-						span.label #ff006a 
-					.icon.icon-bolt-8cdb00
-						span.label #8cdb00 
-
-				h3 Rewriting CSS Rules
-				#rewriting-injection.cf
-					.icon.icon-paperclip 
-						span.label Paperclip
-					a.button(onclick="icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))") Change the colors
- 
-				h3 Multiple SVGs in Background
-				a(href="https://developer.mozilla.org/en-US/docs/CSS/Multiple_backgrounds") multiple backgrounds
-				#multiple-svg-injection.cf
-					.icon.icon-mail.icon-spin.icon-wrench 
-						span.label Mail, Spin &amp; Wrench
+				.sub-section
+					h3 Basic SVG CSS Injection
+					p Look at the original HTML/CSS source - there's no reference to these background images. The SVG injection only adds the background image&mdash;all other CSS rules still need to be created manually.
+					#basic-injection.cf
+						.icon.icon-ampersand 
+							span.label Ampersand
+						.icon.icon-aperture 
+							span.label Aperture
+						.icon.icon-bolt 
+							span.label Bolt
+						.icon.icon-brush 
+							span.label Brush
+						.icon.icon-cloud 
+							span.label Cloud
+						.icon.icon-cog 
+							span.label Cog
+						.icon.icon-curved-arrow 
+							span.label Curved Arrow
+						.icon.icon-dial 
+							span.label Dial
+						.icon.icon-eye 
+							span.label Eye
+						.icon.icon-fork 
+							span.label Fork
+						.icon.icon-layers 
+							span.label Layers
+						.icon.icon-mail 
+							span.label Mail
+						.icon.icon-mic 
+							span.label Mic
+						.icon.icon-spin 
+							span.label Spin
+						.icon.icon-wrench 
+							span.label Wrench
+				.sub-section
+					h3 Modifying SVG Prior to Injection
+					p The original SVG in the footer is black, but additional rules were created at load time.
+					#modified-injection.cf
+						.icon.icon-bolt-35d3e9 
+							span.label #35d3e9 
+						.icon.icon-bolt-ff9200
+							span.label #ff9200 
+						.icon.icon-bolt-b66dff
+							span.label #b66dff 
+						.icon.icon-bolt-ff006a
+							span.label #ff006a 
+						.icon.icon-bolt-8cdb00
+							span.label #8cdb00 
+				.sub-section
+					h3 Rewriting CSS Rules
+					p Rules can be changed on the fly by parsing SVGs and modifying the <code>fill</code> attributes
+					p 
+						strong Click the icon to change its color.
+					#runtime-injection.cf
+						.icon.icon-paperclip 
+							span.label Paperclip
+						
+				.sub-section
+					h3 Multiple SVGs in a Background
+					p The <a href="https://developer.mozilla.org/en-US/docs/CSS/Multiple_backgrounds">multiple image background</a> in CSS3 pulls in multiple SVGs to generate a single rule.
+					#multiple-svg-injection.cf
+						.icon.icon-mail.icon-spin.icon-wrench 
+							span.label Mail, Spin &amp; Wrench
 									
-			#code
+			#code.section
 				h2 Sample Code
-				p Lorem ipsum
-				h3 HTML
-				pre 
-					code
-						include mini-demo-code-html.html
-				p It's important to note that this process simply creates a <code>background-image</code> rule for each SVG node. This means that sizing, positioning, repeating, etc. needs to be handled manually.
-				h3 Javascript
-				pre
-					code
-						include mini-demo-code-javascript.html
+				p The code to pull this off is pretty simple. All SVGs are added right above the <code>body</code> tag. You'll notice that I've nested the SVG (which is semantically legitimate). The top-most SVG tag is hidden by making the width and height attributes 0.
+				.sub-section
+					h3 HTML
+					pre 
+						code
+							include mini-demo-code-html.html
+					p Again, it's important to note that this process simply creates a <code>background-image</code> rule for each SVG node. This means that sizing, positioning, repeating, etc. needs to be handled manually.
+				.sub-section
+					h3 Javascript
+					h4 Basic Injection
+					p The Javascript parses the SVG nodes based on the selector string you pass to the class. The most basic implementation only needs the selector.
+					pre
+						code
+							include mini-demo-code-javascript-basic.html
+					h4 Modifying SVG Prior to Injection
+					p Color variations can be created by passing an array of objects (icon name and array of colors) as the second parameter. The variation has the hex color appended to the base class name (Example: <code>.icon-paperclip-ff0000</code>).
+					pre
+						code
+							include mini-demo-code-javascript-modify-colors.html
+					h4 Rewriting CSS Rules
+					p Rules can also be modified after load for fast alterations.
+					pre
+						code
+							include mini-demo-code-javascript-runtime.html
+					h4 Multiple SVGs in a Background
+					p Multi-background rules generate a CSS selector with all icons included (Example: <code>.icon-mail.icon-spin.icon-wrench</code>).
+					pre
+						code
+							include mini-demo-code-javascript-multiple.html
 
-			#performance
+			#performance.section
 				h2 Performance
-				p My tests have been very positive. This demo averages around a 9ms execution time on my laptop in Chrome/Firefox. It took your browser <span id="execution-time"></span>ms.
+				p My tests have been very positive without putting any time on optimization. This demo averages around a 9ms execution time on my laptop in Chrome/Firefox. It took your browser <span id="execution-time"></span>ms to generate 25 CSS rules.
 
-			#best-practices
+			#best-practices.section
 				h2 Best Practices
+				p Basic injection is <em>fast</em>. From my tests, you would need to throw <em>hundreds</em> of SVGs in the footers to have any noticable performance issues. Creating multiple-image backgrounds with different colors begins to slow things down. 
 
 		svg#svg-injection-container(width="0", height="0")
 			svg#icon-ampersand.iconic(xmlns="http://www.w3.org/2000/svg")
@@ -149,11 +167,12 @@ html
 		script
 				date1 = new Date()
 				milliseconds1 = date1.getTime()
-				icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00'], 'icon-ampersand':['#00ff00']})
+				icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00']})
 				icnzr.combine(['icon-mail', 'icon-spin', 'icon-wrench'], ['#b66dff', '#ff006a', '#8cdb00'])
 				date2 = new Date()
 				milliseconds2 = date2.getTime()
 				diff=date2-date1
 				document.querySelector('#execution-time').innerHTML=diff;
-				//console.log(diff)
-			
+				var button = document.querySelector('#runtime-injection .icon').onclick = function() {
+					icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))
+				}

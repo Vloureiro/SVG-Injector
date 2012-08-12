@@ -7,66 +7,81 @@
   <body>
     <div class="container">
       <h1>SVG CSS Injection Demo</h1>
-      <div id="introduction">
+      <div id="introduction" class="section">
         <h2>Introduction</h2>
-        <ul>
-          <li>What it is</li>
-          <li>It never felt quite right to treat an SVG like an image. The strength of SVG is that it's text-based. That can and should be used as a strength</li>
-        </ul><a href="#">Link to full article</a>
+        <p class="large">SVG CSS injection is a new approach towards displaying vector imagery in HTML. The method works by including SVG information in the footer and using Javascript to parse the SVGs to generate CSS rules. Since this is a preliminary demo, I've kept the sample code light - just view source to see all the details.</p>
         <h2>Advantages</h2>
-        <ul>
-          <li>Multiple Background</li>
-          <li>Page-specific CSS rules</li>
-          <li>Dynamic SVG variation creation</li>
-          <li>Run-time SVG alteration</li>
-        </ul>
+        <dl>
+          <dt>Reduction of Page Requests
+            <dd>All SVG is pulled down with your HTML file (the one request you <em>can't</em> remove). </dd>
+          </dt>
+          <dt>Page-specific CSS Rules
+            <dd>Only include the SVG you need for a specific page. This can make CSS files considerable smaller if you're using data URIs in your CSS. There's no need to include 20 data URI SVGs in your CSS if you're only using 2.</dd>
+          </dt>
+          <dt>Dynamic Creation of Variations
+            <dd>With SVG included in your HTML, it is DOM-accessibile. This allows the creation of multiple variations of an icon based on a single SVG. </dd>
+          </dt>
+          <dt>Create Advanced Background Rules
+            <dd>Use separate SVGs to build complex multiple background rules.</dd>
+          </dt>
+        </dl>
       </div>
-      <div id="demo">
+      <div id="demo" class="section">
         <h2>Demo</h2>
-        <h3>Basic SVG CSS Injection</h3>
-        <p>Look at the original HTML/CSS source - there's no reference to these background images.</p>
-        <div id="basic-injection" class="cf">
-          <div class="icon icon-ampersand"> <span class="label">Ampersand</span></div>
-          <div class="icon icon-aperture"> <span class="label">Aperture</span></div>
-          <div class="icon icon-bolt"> <span class="label">Bolt</span></div>
-          <div class="icon icon-brush"> <span class="label">Brush</span></div>
-          <div class="icon icon-cloud"> <span class="label">Cloud</span></div>
-          <div class="icon icon-cog"> <span class="label">Cog</span></div>
-          <div class="icon icon-curved-arrow"> <span class="label">Curved Arrow</span></div>
-          <div class="icon icon-denied"> <span class="label">Denied</span></div>
-          <div class="icon icon-dial"> <span class="label">Dial</span></div>
-          <div class="icon icon-eye"> <span class="label">Eye</span></div>
-          <div class="icon icon-fork"> <span class="label">Fork</span></div>
-          <div class="icon icon-layers"> <span class="label">Layers</span></div>
-          <div class="icon icon-mail"> <span class="label">Mail</span></div>
-          <div class="icon icon-mic"> <span class="label">Mic</span></div>
-          <div class="icon icon-paperclip"> <span class="label">Paperclip</span></div>
-          <div class="icon icon-spin"> <span class="label">Spin</span></div>
-          <div class="icon icon-wrench"> <span class="label">Wrench</span></div>
-          <div class="icon icon-x-alt"> <span class="label">X</span></div>
+        <div class="sub-section">
+          <h3>Basic SVG CSS Injection</h3>
+          <p>Look at the original HTML/CSS source - there's no reference to these background images. The SVG injection only adds the background image&mdash;all other CSS rules still need to be created manually.</p>
+          <div id="basic-injection" class="cf">
+            <div class="icon icon-ampersand"> <span class="label">Ampersand</span></div>
+            <div class="icon icon-aperture"> <span class="label">Aperture</span></div>
+            <div class="icon icon-bolt"> <span class="label">Bolt</span></div>
+            <div class="icon icon-brush"> <span class="label">Brush</span></div>
+            <div class="icon icon-cloud"> <span class="label">Cloud</span></div>
+            <div class="icon icon-cog"> <span class="label">Cog</span></div>
+            <div class="icon icon-curved-arrow"> <span class="label">Curved Arrow</span></div>
+            <div class="icon icon-dial"> <span class="label">Dial</span></div>
+            <div class="icon icon-eye"> <span class="label">Eye</span></div>
+            <div class="icon icon-fork"> <span class="label">Fork</span></div>
+            <div class="icon icon-layers"> <span class="label">Layers</span></div>
+            <div class="icon icon-mail"> <span class="label">Mail</span></div>
+            <div class="icon icon-mic"> <span class="label">Mic</span></div>
+            <div class="icon icon-spin"> <span class="label">Spin</span></div>
+            <div class="icon icon-wrench"> <span class="label">Wrench</span></div>
+          </div>
         </div>
-        <h3>Modifying SVG Prior to Injection</h3><span>The original SVG in the footer is black, but additional rules were created at load time.</span>
-        <div id="modified-injection" class="cf">
-          <div class="icon icon-bolt-35d3e9"> <span class="label">#35d3e9 </span></div>
-          <div class="icon icon-bolt-ff9200"><span class="label">#ff9200 </span></div>
-          <div class="icon icon-bolt-b66dff"><span class="label">#b66dff </span></div>
-          <div class="icon icon-bolt-ff006a"><span class="label">#ff006a </span></div>
-          <div class="icon icon-bolt-8cdb00"><span class="label">#8cdb00 </span></div>
+        <div class="sub-section">
+          <h3>Modifying SVG Prior to Injection</h3>
+          <p>The original SVG in the footer is black, but additional rules were created at load time.</p>
+          <div id="modified-injection" class="cf">
+            <div class="icon icon-bolt-35d3e9"> <span class="label">#35d3e9 </span></div>
+            <div class="icon icon-bolt-ff9200"><span class="label">#ff9200 </span></div>
+            <div class="icon icon-bolt-b66dff"><span class="label">#b66dff </span></div>
+            <div class="icon icon-bolt-ff006a"><span class="label">#ff006a </span></div>
+            <div class="icon icon-bolt-8cdb00"><span class="label">#8cdb00 </span></div>
+          </div>
         </div>
-        <h3>Rewriting CSS Rules</h3>
-        <div id="rewriting-injection" class="cf">
-          <div class="icon icon-paperclip"> <span class="label">Paperclip</span></div><a onclick="icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))" class="button">Change the colors</a>
+        <div class="sub-section">
+          <h3>Rewriting CSS Rules</h3>
+          <p>Rules can be changed on the fly by parsing SVGs and modifying the <code>fill</code> attributes</p>
+          <p> <strong>Click the icon to change its color.</strong></p>
+          <div id="runtime-injection" class="cf">
+            <div class="icon icon-paperclip"> <span class="label">Paperclip</span></div>
+          </div>
         </div>
-        <h3>Multiple SVGs in Background</h3><a href="https://developer.mozilla.org/en-US/docs/CSS/Multiple_backgrounds">multiple backgrounds</a>
-        <div id="multiple-svg-injection" class="cf">
-          <div class="icon icon-mail icon-spin icon-wrench"> <span class="label">Mail, Spin &amp; Wrench</span></div>
+        <div class="sub-section">
+          <h3>Multiple SVGs in a Background</h3>
+          <p>The <a href="https://developer.mozilla.org/en-US/docs/CSS/Multiple_backgrounds">multiple image background</a> in CSS3 pulls in multiple SVGs to generate a single rule.</p>
+          <div id="multiple-svg-injection" class="cf">
+            <div class="icon icon-mail icon-spin icon-wrench"> <span class="label">Mail, Spin &amp; Wrench</span></div>
+          </div>
         </div>
       </div>
-      <div id="code">
+      <div id="code" class="section">
         <h2>Sample Code</h2>
-        <p>Lorem ipsum</p>
-        <h3>HTML</h3>
-        <pre> <code>&lt;html&gt;
+        <p>The code to pull this off is pretty simple. All SVGs are added right above the <code>body</code> tag. You'll notice that I've nested the SVG (which is semantically legitimate). The top-most SVG tag is hidden by making the width and height attributes 0.</p>
+        <div class="sub-section">
+          <h3>HTML</h3>
+          <pre> <code>&lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;SVG CSS injection. A simple demo.&lt;/title&gt;
     &lt;style&gt;
@@ -91,16 +106,35 @@
     &lt;script&gt;icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-mail':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00']})&lt;/script&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-        <p>It's important to note that this process simply creates a <code>background-image</code> rule for each SVG node. This means that sizing, positioning, repeating, etc. needs to be handled manually.</p>
-        <h3>Javascript</h3>
-        <pre><code>icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00'], 'icon-ampersand':['#00ff00']})</code></pre>
+          <p>Again, it's important to note that this process simply creates a <code>background-image</code> rule for each SVG node. This means that sizing, positioning, repeating, etc. needs to be handled manually.</p>
+        </div>
+        <div class="sub-section">
+          <h3>Javascript</h3>
+          <h4>Basic Injection</h4>
+          <p>The Javascript parses the SVG nodes based on the selector string you pass to the class. The most basic implementation only needs the selector.</p>
+          <pre><code>var icnzr = new Iconizer('#svg-injection-container .iconic')</code></pre>
+          <h4>Modifying SVG Prior to Injection</h4>
+          <p>Color variations can be created by passing an array of objects (icon name and array of colors) as the second parameter. The variation has the hex color appended to the base class name (Example: <code>.icon-paperclip-ff0000</code>).</p>
+          <pre><code>var icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00'], 'icon-ampersand':['#00ff00']})</code></pre>
+          <h4>Rewriting CSS Rules</h4>
+          <p>Rules can also be modified after load for fast alterations.</p>
+          <pre><code>var icnzr = new Iconizer('#svg-injection-container .iconic')
+var button = document.querySelector('#runtime-injection .button').onclick = function() {
+	icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))
+}</code></pre>
+          <h4>Multiple SVGs in a Background</h4>
+          <p>Multi-background rules generate a CSS selector with all icons included (Example: <code>.icon-mail.icon-spin.icon-wrench</code>).</p>
+          <pre><code>icnzr = new Iconizer('#svg-injection-container .iconic')
+icnzr.combine(['icon-mail', 'icon-spin', 'icon-wrench'], ['#b66dff', '#ff006a', '#8cdb00'])</code></pre>
+        </div>
       </div>
-      <div id="performance">
+      <div id="performance" class="section">
         <h2>Performance</h2>
-        <p>My tests have been very positive. This demo averages around a 9ms execution time on my laptop in Chrome/Firefox. It took your browser <span id="execution-time"></span>ms.</p>
+        <p>My tests have been very positive without putting any time on optimization. This demo averages around a 9ms execution time on my laptop in Chrome/Firefox. It took your browser <span id="execution-time"></span>ms to generate 25 CSS rules.</p>
       </div>
-      <div id="best-practices">
+      <div id="best-practices" class="section">
         <h2>Best Practices</h2>
+        <p>Basic injection is <em>fast</em>. From my tests, you would need to throw <em>hundreds</em> of SVGs in the footers to have any noticable performance issues. Creating multiple-image backgrounds with different colors begins to slow things down. </p>
       </div>
     </div>
     <svg id="svg-injection-container" width="0" height="0">
@@ -129,7 +163,6 @@
 
       </svg>
       <svg id="icon-dial" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="318.281px"><path fill="#000" d="M160,118.281c22.09,0,40,17.905,40,40c0,22.09-17.91,40-40,40s-40-17.91-40-40C120,136.187,137.91,118.281,160,118.281z"/><path fill="#000" d="M285.547,60.469c-3.438,2.812-7.617,4.692-12.422,4.692c-11.016,0-20-8.911-20-20c0-4.839,1.953-9.141,4.844-12.661c-22.188-17.109-49.062-28.628-78.359-32.271c-1.016,10.083-9.219,18.052-19.609,18.052S141.289,10.229,140.391,0c-29.692,3.828-56.719,15.552-79.102,33.281c2.539,3.359,4.341,7.339,4.341,11.88c0,11.089-8.911,20-20,20c-4.448,0-8.438-1.724-11.758-4.224C12.969,87.969,0,121.479,0,158.281c0,88.359,71.641,160,160,160s160-71.641,160-160C320,121.128,306.875,87.461,285.547,60.469z M160,238.281c-44.18,0-80-35.82-80-80c0-22.109,8.95-42.07,23.442-56.562L160,45.161l56.484,56.479C231.016,116.128,240,136.172,240,158.281C240,202.5,204.18,238.281,160,238.281z"/></svg>
-
       </svg>
       <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="240px"><path fill="#000" d="M160,0C72.002,0,0,120,0,120s72.002,120,160,120s160-120,160-120S250,0,160,0z M160,200c-43.999,0-80-35.996-80-80c0-43.999,36.001-80,80-80c44.004,0,80,36.001,80,80C240,164.004,200,200,160,200z"/><circle fill="#000" cx="160" cy="120" r="40"/></svg>
       </svg>
@@ -162,13 +195,15 @@
     <script>
       date1 = new Date()
       milliseconds1 = date1.getTime()
-      icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00'], 'icon-ampersand':['#00ff00']})
+      icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00']})
       icnzr.combine(['icon-mail', 'icon-spin', 'icon-wrench'], ['#b66dff', '#ff006a', '#8cdb00'])
       date2 = new Date()
       milliseconds2 = date2.getTime()
       diff=date2-date1
       document.querySelector('#execution-time').innerHTML=diff;
-      //console.log(diff)
+      var button = document.querySelector('#runtime-injection .icon').onclick = function() {
+       icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))
+      }
     </script>
   </body>
 </html>

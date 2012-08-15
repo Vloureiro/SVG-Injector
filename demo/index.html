@@ -1,49 +1,195 @@
 
 <html>
   <head>
+    <title>SVG CSS Injection Demo</title>
     <link rel="stylesheet" href="style.css"/>
   </head>
-  <body><span class="icon-ampersand icon">Bars</span><span class="icon-x icon"></span>
-    <svg id="prefix-svg-container" width="0" height="0">
-      <svg id="icon-ampersand" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 18.663 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="19px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18.663 32">	<path d="m9.2 32c-2.4 0-4.7-0.9-6.5-2.7-3.6-3.6-3.6-9.4 0-13l8.1-7.9c0.46-0.46 0.73-1.1 0.73-1.8 0-0.68-0.27-1.3-0.74-1.8-1.2-0.7-2.8-0.7-3.8 0.2-1 1-1 2.7 0 3.6l-2.8 2.7c-2.6-2.4-2.6-6.5 0-9.1s6.7-2.6 9.3-0.004c1.2 1.2 1.9 2.9 1.9 4.6 0 1.8-0.68 3.4-1.9 4.6l-8.1 7.9c-2 2-2 5.3 0.02 7.4 2 2 5.3 2 7.4 0 2-2 2-5.3 0-7.4l-1.4-1.4 4.4-4.3 2.8 2.8-1.7 1.7c2.3 3.6 1.9 8.4-1.3 11-2 1-4 2-6.8 2z" fill="#010101"/></svg>
+  <body>
+    <div class="container">
+      <h1>SVG CSS Injection Demo</h1>
+      <div id="introduction" class="section">
+        <h2>Introduction</h2>
+        <p class="large">SVG CSS injection is a different approach towards displaying vector imagery in HTML. The method works by including SVG information in the footer and using Javascript to parse the SVGs to generate CSS rules. Since this is a preliminary demo, I've kept the sample code light - just view source to see all the details. Read more about the advantages and use cases <a href="http://www.somerandomdude.com/2012/08/12/svg-css-injection/" target="_blank">on my blog post</a>.</p>
+      </div>
+      <div id="demo" class="section">
+        <h2>Demo</h2>
+        <p><strong>Note: All code is unoptimized and proof of concept. The demos are intended to communicate the method rather than the implementation.</strong></p>
+        <div class="sub-section">
+          <h3>Basic SVG CSS Injection</h3>
+          <p>Look at the original HTML/CSS source - there's no reference to these background images. The SVG injection only adds the background image&mdash;all other CSS rules still need to be created manually.</p>
+          <div id="basic-injection" class="cf">
+            <div class="icon icon-ampersand"> <span class="label">Ampersand</span></div>
+            <div class="icon icon-aperture"> <span class="label">Aperture</span></div>
+            <div class="icon icon-bolt"> <span class="label">Bolt</span></div>
+            <div class="icon icon-brush"> <span class="label">Brush</span></div>
+            <div class="icon icon-cloud"> <span class="label">Cloud</span></div>
+            <div class="icon icon-cog"> <span class="label">Cog</span></div>
+            <div class="icon icon-curved-arrow"> <span class="label">Curved Arrow</span></div>
+            <div class="icon icon-dial"> <span class="label">Dial</span></div>
+            <div class="icon icon-eye"> <span class="label">Eye</span></div>
+            <div class="icon icon-fork"> <span class="label">Fork</span></div>
+            <div class="icon icon-layers"> <span class="label">Layers</span></div>
+            <div class="icon icon-mail"> <span class="label">Mail</span></div>
+            <div class="icon icon-mic"> <span class="label">Mic</span></div>
+            <div class="icon icon-spin"> <span class="label">Spin</span></div>
+            <div class="icon icon-wrench"> <span class="label">Wrench</span></div>
+          </div>
+        </div>
+        <div class="sub-section">
+          <h3>Modifying SVG Prior to Injection</h3>
+          <p>The original SVG in the footer is black, but additional rules were created at load time.</p>
+          <div id="modified-injection" class="cf">
+            <div class="icon icon-bolt-35d3e9"> <span class="label">#35d3e9 </span></div>
+            <div class="icon icon-bolt-ff9200"><span class="label">#ff9200 </span></div>
+            <div class="icon icon-bolt-b66dff"><span class="label">#b66dff </span></div>
+            <div class="icon icon-bolt-ff006a"><span class="label">#ff006a </span></div>
+            <div class="icon icon-bolt-8cdb00"><span class="label">#8cdb00 </span></div>
+          </div>
+        </div>
+        <div class="sub-section">
+          <h3>Rewriting CSS Rules</h3>
+          <p>Rules can be changed on the fly by parsing SVGs and modifying the <code>fill</code> attributes</p>
+          <p> <strong>Click the icon to change its color.</strong></p>
+          <div id="runtime-injection" class="cf">
+            <div class="icon icon-paperclip"> <span class="label">Paperclip</span></div>
+          </div>
+        </div>
+        <div class="sub-section">
+          <h3>Multiple SVGs in a Background</h3>
+          <p>The <a href="https://developer.mozilla.org/en-US/docs/CSS/Multiple_backgrounds">multiple image background</a> in CSS3 pulls in multiple SVGs to generate a single rule.</p>
+          <div id="multiple-svg-injection" class="cf">
+            <div class="icon icon-mail icon-spin icon-wrench"> <span class="label">Mail, Spin &amp; Wrench</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="code" class="section">
+        <h2>Sample Code</h2>
+        <p>The code to pull this off is pretty simple. All SVGs are added right above the <code>body</code> tag. You'll notice that I've nested the SVG (which is semantically legitimate). The top-most SVG tag is hidden by making the width and height attributes 0.</p>
+        <div class="sub-section">
+          <h3>HTML</h3>
+          <pre> <code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;SVG CSS injection. A simple demo.&lt;/title&gt;
+    &lt;style&gt;
+      body {
+       padding:30px;
+       font-family:'Helvetica', Helvetica, Arial, sans-serif;
+      }
+      &lt;!-- You still need to manage all rules around positioning, sizing, repeating, etc. for the background image --&gt;
+      .icon {
+       width:132px; padding:140px 20px 10px 20px; text-align:center; background-repeat: no-repeat; background-size:auto 70px; background-position:center center; background-color:#fafafa; box-shadow:0 0 20px rgba(0,0,0,.2); margin:10px; font-size:12px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;SVG CSS injection. A simple demo.&lt;/h1&gt;
+    &lt;div class=&quot;icon icon-mail&quot;&gt;&lt;span class=&quot;label&quot;&gt;Mail&lt;/span&gt;&lt;/div&gt;
+    &lt;svg id=&quot;svg-injection-container&quot; width=&quot;0&quot; height=&quot;0&quot;&gt;
+      &lt;svg id=&quot;icon-mail&quot; class=&quot;iconic&quot;&gt;&lt;svg style=&quot;enable-background:new 0 0 32 24&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; height=&quot;24px&quot; width=&quot;32px&quot; y=&quot;0px&quot; x=&quot;0px&quot;  viewBox=&quot;0 0 32 24&quot;&gt;&lt;g fill=&quot;#010101&quot;&gt;	&lt;polygon points=&quot;16 11 32 3.9 32 0 0 0 0 3.9&quot;/&gt;	&lt;polygon points=&quot;16 16 0 8.3 0 24 32 24 32 8.3&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;
+      &lt;/svg&gt;
+    &lt;/svg&gt;
+    &lt;script src=&quot;svg-css-injector.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-mail':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00']})&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          <p>Again, it's important to note that this process simply creates a <code>background-image</code> rule for each SVG node. This means that sizing, positioning, repeating, etc. needs to be handled manually.</p>
+        </div>
+        <div class="sub-section">
+          <h3>Javascript</h3>
+          <h4>Basic Injection</h4>
+          <p>The Javascript parses the SVG nodes based on the selector string you pass to the class. The most basic implementation only needs the selector.</p>
+          <pre><code>var icnzr = new Iconizer('#svg-injection-container .iconic')</code></pre>
+          <h4>Modifying SVG Prior to Injection</h4>
+          <p>Color variations can be created by passing an array of objects (icon name and array of colors) as the second parameter. The variation has the hex color appended to the base class name (Example: <code>.icon-paperclip-ff0000</code>).</p>
+          <pre><code>var icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00'], 'icon-ampersand':['#00ff00']})</code></pre>
+          <h4>Rewriting CSS Rules</h4>
+          <p>Rules can also be modified after load for fast alterations.</p>
+          <pre><code>var icnzr = new Iconizer('#svg-injection-container .iconic')
+var button = document.querySelector('#runtime-injection .button').onclick = function() {
+	icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))
+}</code></pre>
+          <h4>Multiple SVGs in a Background</h4>
+          <p>Multi-background rules generate a CSS selector with all icons included (Example: <code>.icon-mail.icon-spin.icon-wrench</code>).</p>
+          <pre><code>icnzr = new Iconizer('#svg-injection-container .iconic')
+icnzr.combine(['icon-mail', 'icon-spin', 'icon-wrench'], ['#b66dff', '#ff006a', '#8cdb00'])</code></pre>
+        </div>
+      </div>
+      <div id="performance" class="section">
+        <h2>Performance</h2>
+        <p>My tests have been very positive without putting any time on optimization. This demo averages around a 9ms execution time on my laptop in Chrome/Firefox. It took your browser <span id="execution-time"></span>ms to generate 25 CSS rules.</p>
+      </div>
+      <div id="best-practices" class="section">
+        <h2>Best Practices</h2>
+        <p>Basic injection is <em>fast</em>. From my tests, you would need to throw <em>hundreds</em> of SVGs in the footers to have any noticable performance issues. Creating multiple-image backgrounds with different colors begins to slow things down. </p>
+      </div>
+    </div>
+    <svg id="svg-injection-container" width="0" height="0">
+      <svg id="icon-ampersand" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="186.657px" height="320px"><path fill="#000" d="M92.12,320c-23.588,0-47.187-8.984-65.199-26.914c-35.897-35.977-35.897-94.491,0-130.384l81.132-79.379c4.609-4.648,7.275-11.021,7.275-17.852c0-6.796-2.666-13.197-7.422-18.046c-9.927-9.922-26.094-9.883-36.093,0.039c-9.854,9.917-9.854,26.088,0.068,36.02l-28.32,28.32c-25.498-25.552-25.498-67.069-0.029-92.621c25.62-25.59,67.108-25.551,92.636-0.039c12.421,12.378,19.218,28.867,19.218,46.366c0,17.5-6.797,33.95-19.218,46.294l-81.107,79.34c-20.2,20.155-20.2,53.271,0.2,73.621c20.312,20.352,53.446,20.312,73.837,0c20.282-20.351,20.282-53.476,0-73.787l-14.229-14.141l43.505-43.477l28.281,28.281l-16.719,16.719c22.656,35.624,18.516,83.592-12.588,114.686C139.371,311.016,115.708,320,92.12,320L92.12,320z"/></svg>
+
       </svg>
-      <svg id="icon-aperture" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<g fill="#010101">		<path d="m21 14l5.7-9.7c-3-2.6-7-4.3-11-4.3-1 0-2 0.12-2.9 0.29l8 14z"/>		<path d="m20 20h11c1-1 1-3 1-4 0-3.9-1.4-7.4-3.7-10l-8 14z"/>		<path d="m16 10l-5.4-9.2c-4.4 1.5-8 4.8-9.8 9.2h15z"/>		<path d="m16 22l5.4 9.1c4.4-1.5 8-4.8 9.8-9.1h-15z"/>		<path d="m12 12h-11c-0.77 1-1 3-1 4 0 3.9 1.4 7.4 3.8 10l8.2-14z"/>		<path d="m11 18l-5.7 9.8c2.7 2 6.7 4 11 4 1 0 2.1-0.12 3-0.3l-8-14z"/>	</g></svg>
+      <svg id="icon-aperture" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="317.998px"><path d="M210,140l57.002-97.002c-30-25.996-70-42.998-110-42.998c-10,0-20,1.201-29.004,2.9l80,140L210,140z"/><path d="M200,200h110c10-10,10-30,10-40c0-38.999-14.004-73.999-37.002-100l-80,140H200z"/><path d="M160,100L106.001,7.998c-43.999,15-80,48.003-98.003,92.002h150H160z"/><path d="M160,220l54.004,90.996c43.994-15,80-47.998,97.998-90.996h-150H160z"/><path d="M120,120H10c-7.7,10-10,30-10,40c0,39.004,13.999,74.004,37.998,100L120,120z"/><path d="M110,180l-57.002,97.998c27.002,20,67.002,40,110,40c10,0,21.006-1.201,30-2.998l-80-140L110,180z"/></svg>
+
       </svg>
-      <svg id="icon-aperture-alt" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<g fill="#010101">		<path d="m30 9l-10 10h11c1-1 1-2 1-3 0-3-1-5-2-7z"/>		<path d="m21 15l8.2-8.2c-2-2.9-4.8-5-8.2-6.1v14z"/>		<path d="m17 21l8.2 8.2c2.9-1.9 5-4.8 6.2-8.2h-14z"/>		<path d="m19 12v-12c-1 0.12-2 0-3 0-2.6 0-4.9 0.65-7.1 1.7l10 10z"/>		<path d="m13 20v11c1 1 2 1 3 1 2.5 0 4.9-0.64 7-1.7l-10-10z"/>		<path d="m11 17l-8.2 8c1.9 2.9 4.8 5 8.2 6.1v-14z"/>		<path d="m0.3 13c-0.18 1-0.3 2-0.3 3 0 2.5 0.64 4.9 1.7 7l10-10h-12z"/>		<path d="m7 2.8c-2.9 1.9-5 4.8-6.1 8.2h14l-8-8.2z"/>	</g></svg>
+      <svg id="icon-bolt" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="320px"><polygon fill="#000" points="320,0 80,160 140,200 0,320 240,200 180,160 "/></svg>
+
       </svg>
-      <svg id="icon-arrow-down" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<path d="m32 16l-5.7-5.7-6.3 6.3v-16h-8v17l-6.3-6.3-5.7 5 16 16 16-16z" fill="#010101"/></svg>
+      <svg id="icon-brush" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="319.993px" height="320px"><path fill="#010101" d="M159.964,213.319c0-29.454-23.912-53.321-53.36-53.321c-29.454,0-53.321,23.867-53.321,53.321l0.039,0.039C53.282,252.812,31.841,287.227,0,305.664l0.161,0.195C15.82,314.844,33.951,320,53.321,320c58.912,0,106.682-47.773,106.682-106.681H159.964z"/><path fill="#010101" d="M308.267,11.714c-15.615-15.62-40.948-15.62-56.563,0L137.702,125.695c26.412,9.41,47.193,30.201,56.559,56.607L308.267,68.278C323.901,52.657,323.901,27.335,308.267,11.714z"/></svg>
+
       </svg>
-      <svg id="icon-arrow-left" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<path d="m16 32l5.7-5.7-6.3-6.3h16v-8h-17l6.3-6.3-5-5.7-16 16 16 16z" fill="#010101"/></svg>
+      <svg id="icon-cloud" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320.004px" height="200px"><path fill="#010101" d="M240.9,39.912c-3.799,0-7.402,0.61-10.996,1.099c-10-25-40-41.001-70.004-41.001c-30,0-56.002,17.002-69,41.001c-3.998,0-7.002-1.001-11-1.001c-44,0-80,36.001-80,80c0,44.004,36,80,80,80h160.004c43.994,0,80-35.996,80-80c0-43.999-40-80-80-80L240.9,39.912z M240.9,159.912h-160c-22.002,0-40-17.998-40-40s19-38.999,40-38.999c0.078,9.399,1.699,18.999,5,26.997l37.002-13.999V77.91c0-21.997,17.998-40,40-40c12.998,0,25,6.401,32.002,16.001c-20,15-30.004,38.003-30.004,63.999h40.004c0-21.997,17.998-40,40-40c21.992,0,40,18.003,40,40c0,20-20,40-40,40L240.9,159.912z"/></svg>
+
       </svg>
-      <svg id="icon-arrow-up" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<path d="m0 16l5.7 5.7 6.3-6.3v16h8v-17l6.3 6.3 6-5-16-16-16 16z" fill="#010101"/></svg>
+      <svg id="icon-cog" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="324.402px" height="320.3px"><path fill="#010101" d="M323.962,180.542v-40.001l-47.999-20c-1.299-3.799-2.705-7.402-4.404-11.001l19.004-47.998l-30-30l-48.008,20c-3.594-1.802-7.295-3.198-10.996-4.6l-20-47.002h-40.001l-20,47.002c-3.999,1.401-7.798,2.9-11.997,4.697L61.558,32.641l-30,27.998l19.004,47.002c-1.001,0-3.003,10-4.004,10l-46.998,20v40.001l46.998,20c1.401,4.102,3.003,7.998,4.902,12.002l-18.999,46.992l27.998,28.008l47.002-19.004c3.799,1.797,7.7,3.203,11.997,4.6l20,50.001h40.001l20-47.999c3.799-1.396,7.5-2.9,11.006-4.6l47.998,18.994l27.998-27.988l-20-48.008c1.699-3.594,2.998-7.197,4.395-10.996l50.001-20L323.962,180.542z M163.961,220.542c-32.999,0-60.001-27.002-60.001-60c0-32.999,27.002-60.001,60.001-60.001c32.998,0,60,27.002,60,60.001C223.961,193.54,193.961,220.542,163.961,220.542z"/></svg>
+
       </svg>
-      <svg id="icon-arrow-right" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<path d="m16 0l-5.7 5.7 6.3 6.3h-16v8h17l-6.3 6.3 5 6 16-16-16-16z" fill="#010101"/></svg>
+      <svg id="icon-curved-arrow" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="240px"><path fill="#010101" d="M280,140C280,62.998,217.002,0,140,0S0,62.998,0,140C0,85,45,40,100,40s100,45,100,100v20h-40l80,80l80-80h-40V140z"/></svg>
+
       </svg>
-      <svg id="icon-bars" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<g fill="#010101">		<rect x="24" height="32" width="8"/>		<rect height="24" width="8" y="8" x="12"/>		<rect y="16" width="8" height="16"/>	</g></svg>
+      <svg id="icon-denied" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="320px"><path fill="#010101" d="M160,0C72.002,0,0,72.002,0,160s72.002,160,160,160s160-72.002,160-160S250,0,160,0z M160,40c25.996,0,50,8.398,69.004,22.002l-170.005,170c-11.997-20-20-40-20-70c0-66.001,53.999-120,120-120L160,40z M160,280c-26.001,0-50-8.398-68.999-22.002l169.995-170c10,20,20,40,20,70c0,70-50,120-119.995,120L160,280z"/></svg>
+
       </svg>
-      <svg id="icon-battery-empty" xmlns="http://www.w3.org/2000/svg" class="iconic">	<svg style="enable-background:new 0 0 32 16" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="16px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 16">	<path d="m32 4h-4v-2c0-1.1-0.9-2-2-2h-24c-1.1 0-2 0.9-2 2v12c0 1.1 0.9 2 2 2h24c1.1 0 2-0.9 2-2v-2h4v-8zm-8 8h-20v-8h20v8z" fill="#010101"/></svg>
+      <svg id="icon-dial" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="318.281px"><path fill="#000" d="M160,118.281c22.09,0,40,17.905,40,40c0,22.09-17.91,40-40,40s-40-17.91-40-40C120,136.187,137.91,118.281,160,118.281z"/><path fill="#000" d="M285.547,60.469c-3.438,2.812-7.617,4.692-12.422,4.692c-11.016,0-20-8.911-20-20c0-4.839,1.953-9.141,4.844-12.661c-22.188-17.109-49.062-28.628-78.359-32.271c-1.016,10.083-9.219,18.052-19.609,18.052S141.289,10.229,140.391,0c-29.692,3.828-56.719,15.552-79.102,33.281c2.539,3.359,4.341,7.339,4.341,11.88c0,11.089-8.911,20-20,20c-4.448,0-8.438-1.724-11.758-4.224C12.969,87.969,0,121.479,0,158.281c0,88.359,71.641,160,160,160s160-71.641,160-160C320,121.128,306.875,87.461,285.547,60.469z M160,238.281c-44.18,0-80-35.82-80-80c0-22.109,8.95-42.07,23.442-56.562L160,45.161l56.484,56.479C231.016,116.128,240,136.172,240,158.281C240,202.5,204.18,238.281,160,238.281z"/></svg>
       </svg>
-      <svg id="icon-battery-full" xmlns="http://www.w3.org/2000/svg" class="iconic">	<svg style="enable-background:new 0 0 32 16" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="16px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 16">	<path d="m32 4h-4v-2c0-1.1-0.9-2-2-2h-24c-1.1 0-2 0.9-2 2v12c0 1.1 0.9 2 2 2h24c1.1 0 2-0.9 2-2v-2h4v-8z" fill="#010101"/></svg>
+      <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="240px"><path fill="#000" d="M160,0C72.002,0,0,120,0,120s72.002,120,160,120s160-120,160-120S250,0,160,0z M160,200c-43.999,0-80-35.996-80-80c0-43.999,36.001-80,80-80c44.004,0,80,36.001,80,80C240,164.004,200,200,160,200z"/><circle fill="#000" cx="160" cy="120" r="40"/></svg>
       </svg>
-      <svg id="icon-battery-half" xmlns="http://www.w3.org/2000/svg" class="iconic">	<svg style="enable-background:new 0 0 32 16" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="16px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 16">	<path d="m32 4h-4v-2c0-1.1-0.9-2-2-2h-24c-1.1 0-2 0.9-2 2v12c0 1.1 0.9 2 2 2h24c1.1 0 2-0.9 2-2v-2h4v-8zm-8 8h-8v-8h8v8z" fill="#010101"/></svg>
+      <svg id="icon-fork" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="275.984px" height="322px"><path fill="#000" d="M198.197,0v38.999C198.197,55,191.996,70,180.199,81L70.2,190.995c-19.004,20-28.003,40-30,69.999h-40l60,60l59.999-60h-40c0.996-13.984,6.797-27.997,16.997-37.997l110.005-110c20-18.999,30-44.999,30-70.995V2.998h-40L198.197,0z"/><path fill="#000" d="M238.197,259.998c-1.094-24.999-10.996-47.997-29.004-65.995l-21.992-22.002l-30,30l21.992,22.002c10,10,16.006,23.983,16.992,37.997h-40l60,60l59.999-60h-39.999L238.197,259.998z"/></svg>
+
       </svg>
-      <svg id="icon-beaker" xmlns="http://www.w3.org/2000/svg" class="iconic">	<svg style="enable-background:new 0 0 16 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="16px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 32">	<path d="m14 0h-12c-1.1 0-2 0.9-2 2v22c0 4.4 3.6 8 8 8s8-3.6 8-8v-22c0-1.1-1-2-2-2zm-4 24c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-1 2-2 2zm2-8h-1.9c-0.016-1.1-0.91-2-2-2s-2 0.9-2 2h-2v-12h8v12z" fill="#010101"/></svg>
+      <svg id="icon-layers" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="280px"><polygon fill="#000" points="0.001,200 160.001,240 320.001,200 320.001,240 160.001,280 0.001,240 "/><polygon fill="#000" points="0.001,120 160.001,160 320.001,120 320.001,160 160.001,200 0.001,160 "/><polygon fill="#000" points="0.001,40 160.001,0 320.001,40 320.001,80 160.001,120 0.001,80 "/></svg>
+
       </svg>
-      <svg id="icon-beaker-alt" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 16 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="16px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 32">	<g fill="#010101">		<circle cx="9" r=".97" cy="9"/>		<path d="m14 0h-12c-1.1 0-2 0.9-2 2v22c0 4.4 3.6 8 8 8s8-3.6 8-8v-22c0-1.1-1-2-2-2zm-9 20c-0.54 0-0.97-0.43-0.97-0.97s0.43-0.97 0.97-0.97 1 0 1 1-0.4 1-1 1zm5 4c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-1 2-2 2zm2-8h-1.9c-0.016-1.1-0.91-2-2-2s-2 0.9-2 2h-2v-12h8v12z"/>	</g></svg>
+      <svg id="icon-mail" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" height="240px" width="320px" y="0px" x="0px"><g fill="#000"><polygon points="160 110 320 39 320 0 0 0 0 39"/>	<polygon points="160 160 0 83 0 240 320 240 320 83"/></g>
+</svg>
+
       </svg>
-      <svg id="icon-bolt" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<polygon points="32 0 8 16 14 20 0 32 24 20 18 16" fill="#010101"/></svg>
+      <svg id="icon-mic" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="240px" height="320px"><path fill="#000" d="M120,160c22.002,0,40-17.998,40-40V40c0-22.002-17.998-40-40-40S80,17.998,80,40v80C80,140,97.998,160,120,160z"/><path fill="#000" d="M160,280h-20v-42.002c60-10,100-60,100-120V98.999c0-11.001-9.004-20-20-20s-20,8.999-20,20v20c0,43.999-35.996,80.005-80,80.005c-43.999,0-80-36.006-80-80.005V100c0-11.001-8.999-20-20-20S0,88.999,0,100v20c0,59.004,42.998,110,100,120v40H80c-22.002,0-40,17.998-40,40h160C200,300,180,280,160,280z"/></svg>
+
       </svg>
-      <svg id="icon-book" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 28 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="28px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28 32">	<path d="m4 0c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h24v-32h-24zm20 28h-16v-24h4v8l4-4 4 4v-8h4v24z" fill="#010101"/></svg>
+      <svg id="icon-paperclip" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="279.934px" height="319.22px"><path fill="#000" d="M110.001,319.22c-29.391,0-57.013-11.484-77.77-32.266C11.45,266.173,0,238.595,0,209.181c0.02-29.375,11.45-56.993,32.231-77.75L143.59,22.48c29.917-29.942,82.769-30.059,112.965,0.161c31.172,31.206,31.172,81.948,0,113.12l-100.196,97.755c-19.297,19.297-51.016,19.336-70.508-0.166c-19.488-19.531-19.488-51.23,0-70.719l38.789-38.794l28.281,28.281l-38.789,38.79c-2.559,2.568-2.93,5.537-2.93,7.07c0,1.543,0.371,4.512,2.93,7.09c5.117,5.088,9.019,5.088,14.141,0l100.156-97.77c15.43-15.41,15.43-40.781-0.156-56.392c-15.117-15.117-41.445-15.117-56.562,0L60.352,159.858C47.29,172.93,40,190.489,40,209.181c0,18.711,7.29,36.289,20.508,49.492c26.451,26.484,72.545,26.484,98.985,0l50-50l28.271,28.281l-50,50C166.993,307.735,139.381,319.22,110.001,319.22z"/></svg>
+
       </svg>
-      <svg id="icon-book-alt" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<g fill="#010101">		<rect height="4" width="8" y="8" x="12"/>		<path d="m28 8l4-4h-4v-4h-24c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h24v-20h4l-4-4zm-4 20h-16v-24h16v24z"/>	</g></svg>
+      <svg id="icon-spin" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="282.002px" height="320px"><path fill="#010101" d="M240,61.001l-27.998,27.998c20,21.001,30,41.001,30,71.001c0,55-45,100-100,100v-20l-40,40l40,40v-20c77.002,0,140-62.998,140-140c0-40-10-72.998-40-98.999H240z"/><path fill="#010101" d="M180,40L140,0v20C62.998,20,0,82.998,0,160c0,37.002,15,72.998,41.001,99.004l27.998-28.008C50,210.996,40,190.996,40,161.001c0-60,45-100,100-100v20l40-40V40z"/></svg>
       </svg>
-      <svg id="icon-book-alt-2" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 28" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="28px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 28">	<path d="m16 4s-4-4-16-4v24c12 0 16 4 16 4s3.9-4 16-4v-24c-12 0-16 4-16 4zm-12 0c5.1 0.43 8.2 1.6 10 2.6v16c-1.8-0.95-4.9-2.1-10-2.6v-16zm24 16c-5.1 0.43-8.2 1.6-10 2.6v-16c2-1.4 5-2.6 10-3v16z" fill="#010101"/></svg>
+      <svg id="icon-wrench" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="319.98px" height="320px"><path fill="#000" d="M316.064,56.431L265.84,106.66h-52.5V53.34l49.609-49.59C255.615,1.538,248.037,0,239.98,0C195.82,0,160,35.84,160,80c0,12.319,3.008,23.848,8.008,34.302L7.808,274.453C3.008,279.297,0,285.938,0,293.359C0,308.047,11.909,320,26.68,320c7.378,0,14.062-2.969,18.828-7.812l160.234-160.176c10.41,4.961,21.963,7.988,34.238,7.988c44.219,0,80-35.84,80-80C319.98,71.738,318.418,63.931,316.064,56.431z"/></svg>
+
       </svg>
-      <svg id="icon-box" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 32 32" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="32px" width="32px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">	<g fill="#010101">		<rect y="12" width="32" height="20"/>		<polygon points="18 8 32 8 28 0 18 0"/>		<polygon points="14 0 4 0 0 8 14 8"/>	</g></svg>
-      </svg>
-      <svg id="icon-x" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg style="enable-background:new 0 0 28 28" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="28px" width="28px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28 28">		<polygon points="28 22 20 14 28 5.6 22 0 14 8.4 5.6 0 0 5.6 8.4 14 0 22 5.6 28 14 20 22 28" fill="#010101"/></svg>
+      <svg id="icon-x-alt" xmlns="http://www.w3.org/2000/svg" class="iconic"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="320px"><path fill="#000" d="M160,0C72.002,0,0,72.002,0,160s72.002,160,160,160s160-72.002,160-160S250,0,160,0z M240,210l-27.998,27.998l-50-50l-51.001,51.006l-28.003-28.008l48.003-49.995L80,110l27.998-27.998l50,47.998l51.006-51.001l27.998,28.003l-50,50l50,50L240,210z"/></svg>
+
       </svg>
     </svg>
-    <script src="app.js"></script>
+    <script src="svg-css-injector.js"></script>
+    <script>
+      date1 = new Date()
+      milliseconds1 = date1.getTime()
+      icnzr = new Iconizer('#svg-injection-container .iconic', {'icon-bolt':['#35d3e9', '#ff9200', '#b66dff', '#ff006a', '#8cdb00']})
+      icnzr.combine(['icon-mail', 'icon-spin', 'icon-wrench'], ['#b66dff', '#ff006a', '#8cdb00'])
+      date2 = new Date()
+      milliseconds2 = date2.getTime()
+      diff=date2-date1
+      document.querySelector('#execution-time').innerHTML=diff;
+      var button = document.querySelector('#runtime-injection .icon').onclick = function() {
+       icnzr.rewriteRule('icon-paperclip', '#'+Math.floor(Math.random()*16777215).toString(16))
+      }
+    </script>
   </body>
 </html>

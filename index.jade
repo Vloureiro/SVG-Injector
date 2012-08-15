@@ -7,19 +7,8 @@ html
 			h1 SVG CSS Injection Demo
 			#introduction.section
 				h2 Introduction
-				p.large SVG CSS injection is a new approach towards displaying vector imagery in HTML. The method works by including SVG information in the footer and using Javascript to parse the SVGs to generate CSS rules. Since this is a preliminary demo, I've kept the sample code light - just view source to see all the details.
+				p.large SVG CSS injection is a different approach towards displaying vector imagery in HTML. The method works by including SVG information in the footer and using Javascript to parse the SVGs to generate CSS rules. Since this is a preliminary demo, I've kept the sample code light - just view source to see all the details. Read more about the advantages and use cases <a href="http://www.somerandomdude.com/2012/08/12/svg-css-injection/" target="_blank">on my blog post</a>.
 				
-				h2 Advantages
-				dl
-					dt Reduction of Page Requests
-						dd All SVG is pulled down with your HTML file (the one request you <em>can't</em> remove). 
-					dt Page-specific CSS Rules
-						dd Only include the SVG you need for a specific page. This can make CSS files considerable smaller if you're using data URIs in your CSS. There's no need to include 20 data URI SVGs in your CSS if you're only using 2.
-					dt Dynamic Creation of Variations
-						dd With SVG included in your HTML, it is DOM-accessibile. This allows the creation of multiple variations of an icon based on a single SVG. 
-					dt Create Advanced Background Rules
-						dd Use separate SVGs to build complex multiple background rules.
-
 			#demo.section
 				h2 Demo
 				.sub-section
